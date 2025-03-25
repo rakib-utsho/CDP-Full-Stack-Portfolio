@@ -56,3 +56,23 @@ export const login = catchAsyncErrors(async (req, res, next) => {
   // Generate Token
   generateToken(user, "Login Successful", 200, res);
 });
+
+// Get All Admins
+export const getAllAdmins = catchAsyncErrors(async (req, res, next) => {
+  const user = req.user;
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+// logout admin
+export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
+    res.status(200).cookie("admin", "", {
+        httpOnly: true,
+        expires: new Date(Date.now()),
+    }).json({
+      success: true,
+      message: "Admin Log Out",
+    });
+});
